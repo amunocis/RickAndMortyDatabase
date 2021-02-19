@@ -1,9 +1,9 @@
 package com.example.rickmorty.model.remote.pojo
 
-import com.example.rickmorty.model.local.entities.Character
+import com.example.rickmorty.model.local.entities.Places
 import com.google.gson.annotations.SerializedName
 
-data class CharacterWrapper(
+data class PlacesWrapper(
     @SerializedName("results")
-    val results: List<Character>
+    val results: List<Places>
 )

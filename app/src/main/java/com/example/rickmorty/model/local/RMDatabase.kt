@@ -5,11 +5,14 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.rickmorty.model.local.dao.CharacterDao
+import com.example.rickmorty.model.local.dao.PlacesDao
 import com.example.rickmorty.model.local.entities.Character
+import com.example.rickmorty.model.local.entities.Places
 
-@Database(entities = [Character::class], version = 1, exportSchema = false)
+@Database(entities = [Character::class, Places::class], version = 2, exportSchema = false)
 abstract class RMDatabase: RoomDatabase() {
     abstract fun characterDao(): CharacterDao
+    abstract fun placesDao(): PlacesDao
 
     companion object {
         @Volatile
@@ -25,7 +28,7 @@ abstract class RMDatabase: RoomDatabase() {
                     context.applicationContext,
                     RMDatabase::class.java,
                     "database"
-                ).build()
+                ).fallbackToDestructiveMigration().build()
                 INSTANCE = instance
                 return instance
             }
