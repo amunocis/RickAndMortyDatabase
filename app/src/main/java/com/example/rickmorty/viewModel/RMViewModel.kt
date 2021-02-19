@@ -34,4 +34,10 @@ class RMViewModel(application: Application): AndroidViewModel(application) {
 
     fun getCharacterList(): LiveData<List<Character>> = repository.characterListLiveData
     fun getPlacesList(): LiveData<List<Places>> = repository.placesListLiveData
+    fun updateCharFav(character: Character) = viewModelScope.launch {
+        repository.updateCharFavImages(character)
+    }
+    fun deleteAllCharacterFav() = viewModelScope.launch {
+        repository.deleteAllCharacterFavorites()
+    }
 }

@@ -1,4 +1,4 @@
-package com.example.rickmorty.ui
+package com.example.rickmorty.view.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,9 +9,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rickmorty.databinding.FragmentFirstBinding
-import com.example.rickmorty.ui.adapter.CharacterAdapter
-import com.example.rickmorty.ui.adapter.PlaceAdapter
+import com.example.rickmorty.view.adapter.CharacterAdapter
+import com.example.rickmorty.view.adapter.PlaceAdapter
 import com.example.rickmorty.viewModel.RMViewModel
+import com.google.android.material.transition.MaterialContainerTransform
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -31,6 +32,7 @@ class FirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sharedElementEnterTransition = MaterialContainerTransform()
         val charAdapter = CharacterAdapter()
         val placeAdapter = PlaceAdapter()
         //binding.recyclerView.adapter = charAdapter
@@ -39,6 +41,7 @@ class FirstFragment : Fragment() {
         when(viewModel.selCat) {
             1 ->
                 viewModel.getCharacterList().observe(viewLifecycleOwner, Observer {
+                    binding.tvTitle.setText("Characters")
                     binding.recyclerView.adapter = charAdapter
                     it?.let {
                         charAdapter.update(it)
@@ -46,6 +49,7 @@ class FirstFragment : Fragment() {
                 })
             2 ->
                 viewModel.getPlacesList().observe(viewLifecycleOwner, Observer {
+                    binding.tvTitle.setText("Locations")
                     binding.recyclerView.adapter = placeAdapter
                     it?.let {
                         placeAdapter.update(it)
@@ -53,7 +57,19 @@ class FirstFragment : Fragment() {
                 })
         }
 
-
-
+        charAdapter.selectedCharacter().observe(viewLifecycleOwner, Observer {
+            it?.let {
+                if(it.fav) {
+                    it.fav = false
+                    viewModel.updateCharFav(it)
+                } else {
+                    it.fav = true
+                    viewModel.updateCharFav(it)
+                }
+            }
+        })
+        binding.btDelete.setOnClickListener {
+            viewModel.deleteAllCharacterFav()
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.rickmorty.ui
+package com.example.rickmorty.view.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

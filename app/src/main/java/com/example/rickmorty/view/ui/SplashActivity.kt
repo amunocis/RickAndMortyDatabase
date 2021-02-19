@@ -1,4 +1,4 @@
-package com.example.rickmorty.ui
+package com.example.rickmorty.view.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +10,6 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         startActivity(Intent(this, MainActivity::class.java))
         finish()
-        SystemClock.sleep(3000)
+        SystemClock.sleep(1000)
     }
 }

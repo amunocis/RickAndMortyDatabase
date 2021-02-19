@@ -1,11 +1,13 @@
-package com.example.rickmorty.ui.adapter
+package com.example.rickmorty.view.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.rickmorty.databinding.CharacterItemBinding
 import com.example.rickmorty.model.local.entities.Character
 
@@ -26,6 +28,13 @@ class CharacterAdapter: RecyclerView.Adapter<CharacterAdapter.CharacterVH>() {
 
         fun bind(character: Character) {
             binding.tvCharacter.text = character.name
+            binding.tvSpecies.text = character.species
+            Glide.with(binding.root).load(character.image).into(binding.ivCharImage)
+            if (character.fav) {
+                binding.ivFav.setColorFilter(Color.RED)
+            } else {
+                binding.ivFav.setColorFilter(Color.LTGRAY)
+            }
             itemView.setOnClickListener(this)
         }
         override fun onClick(v: View?) {

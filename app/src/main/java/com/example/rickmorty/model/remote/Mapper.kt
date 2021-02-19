@@ -7,7 +7,10 @@ import com.example.rickmorty.model.remote.pojo.PlacesWrapper
 
 fun fromInternetToCharacterEntity(wrapper: CharacterWrapper): List<Character> {
     return wrapper.results.map {
-        Character(name = it.name)
+        Character(
+            name = it.name,
+            image = it.image,
+            species = it.species)
     }
 }
 

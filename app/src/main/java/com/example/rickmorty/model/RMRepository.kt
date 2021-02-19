@@ -3,6 +3,7 @@ package com.example.rickmorty.model
 import android.util.Log
 import com.example.rickmorty.model.local.dao.CharacterDao
 import com.example.rickmorty.model.local.dao.PlacesDao
+import com.example.rickmorty.model.local.entities.Character
 import com.example.rickmorty.model.remote.RetrofitInstance
 import com.example.rickmorty.model.remote.fromInternetToCharacterEntity
 import com.example.rickmorty.model.remote.fromInternetToPlacesEntity
@@ -42,5 +43,15 @@ class RMRepository(private val characterDao: CharacterDao, private val placesDao
         }
     }
 
+    suspend fun updateCharFavImages(character: Character) {
+        characterDao.updateCharFavImage(character)
+    }
 
+    suspend fun deleteAllCharacterFavorites() {
+        characterDao.deleteAllCharacterFavorites()
+    }
+
+    suspend fun getAllCharacterFavorites(character: Character) {
+        characterDao.getAllCharacterFavorites()
+    }
 }

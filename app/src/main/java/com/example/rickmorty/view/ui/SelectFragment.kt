@@ -1,4 +1,4 @@
-package com.example.rickmorty.ui
+package com.example.rickmorty.view.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,6 +16,7 @@ class SelectFragment : Fragment() {
 
     private lateinit var binding: SelectFragmentBinding
     private val viewModel: RMViewModel by activityViewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
