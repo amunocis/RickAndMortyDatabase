@@ -5,5 +5,5 @@ import com.google.gson.annotations.SerializedName
 
 data class PlacesWrapper(
     @SerializedName("results")
-    val results: List<Places>
+    val results: List<Places>,
 )

@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.rickmorty.R
 import com.example.rickmorty.databinding.FragmentFirstBinding
 import com.example.rickmorty.view.adapter.CharacterAdapter
 import com.example.rickmorty.view.adapter.PlaceAdapter
@@ -35,6 +37,7 @@ class FirstFragment : Fragment() {
         sharedElementEnterTransition = MaterialContainerTransform()
         val charAdapter = CharacterAdapter()
         val placeAdapter = PlaceAdapter()
+
         //binding.recyclerView.adapter = charAdapter
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
 
@@ -57,6 +60,7 @@ class FirstFragment : Fragment() {
                 })
         }
 
+        // Update Character Favs
         charAdapter.selectedCharacter().observe(viewLifecycleOwner, Observer {
             it?.let {
                 if(it.fav) {
@@ -68,8 +72,32 @@ class FirstFragment : Fragment() {
                 }
             }
         })
+
+        // Update Places Favs
+        placeAdapter.selectedPlaces().observe(viewLifecycleOwner, Observer {
+            it?.let {
+                if(it.fav) {
+                    it.fav = false
+                    viewModel.updatePlaceFav(it)
+                } else {
+                    it.fav = true
+                    viewModel.updatePlaceFav(it)
+                }
+            }
+        })
+
+        // Delete favs
         binding.btDelete.setOnClickListener {
-            viewModel.deleteAllCharacterFav()
+            when(viewModel.selCat) {
+                1 ->
+                    viewModel.deleteAllCharacterFav()
+                2 ->
+                    viewModel.deleteAllPlaceFav()
+            }
+        }
+
+        binding.btShowFavorites.setOnClickListener {
+            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
     }
 }

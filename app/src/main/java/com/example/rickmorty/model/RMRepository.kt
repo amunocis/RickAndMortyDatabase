@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.rickmorty.model.local.dao.CharacterDao
 import com.example.rickmorty.model.local.dao.PlacesDao
 import com.example.rickmorty.model.local.entities.Character
+import com.example.rickmorty.model.local.entities.Places
 import com.example.rickmorty.model.remote.RetrofitInstance
 import com.example.rickmorty.model.remote.fromInternetToCharacterEntity
 import com.example.rickmorty.model.remote.fromInternetToPlacesEntity
@@ -12,6 +13,8 @@ class RMRepository(private val characterDao: CharacterDao, private val placesDao
     private val networkService = RetrofitInstance.retrofitInstance()
     val characterListLiveData = characterDao.getAllCharacterList()
     val placesListLiveData = placesDao.getAllPlacesList()
+    val characterFavoriteListLiveData = characterDao.showAllCharacterFavorites()
+    val placeFavoriteListLiveData = placesDao.showAllPlaceFavorites()
 
     suspend fun fetchCharacter() {
         val service = kotlin.runCatching { networkService.fetchCharacterList() }
@@ -47,11 +50,15 @@ class RMRepository(private val characterDao: CharacterDao, private val placesDao
         characterDao.updateCharFavImage(character)
     }
 
+    suspend fun updatePlaceFavImages(places: Places) {
+        placesDao.updatePlaceFavImage(places)
+    }
+
     suspend fun deleteAllCharacterFavorites() {
         characterDao.deleteAllCharacterFavorites()
     }
 
-    suspend fun getAllCharacterFavorites(character: Character) {
-        characterDao.getAllCharacterFavorites()
+    suspend fun deleteAllPlaceFavorites() {
+        placesDao.deleteAllPlaceFavorites()
     }
 }

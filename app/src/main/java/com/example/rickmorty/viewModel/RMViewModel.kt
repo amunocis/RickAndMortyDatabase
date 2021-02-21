@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 
 class RMViewModel(application: Application): AndroidViewModel(application) {
     private val repository: RMRepository
+
     var selCat = 2
 
     init {
@@ -34,10 +35,24 @@ class RMViewModel(application: Application): AndroidViewModel(application) {
 
     fun getCharacterList(): LiveData<List<Character>> = repository.characterListLiveData
     fun getPlacesList(): LiveData<List<Places>> = repository.placesListLiveData
+
     fun updateCharFav(character: Character) = viewModelScope.launch {
         repository.updateCharFavImages(character)
     }
+
+    fun updatePlaceFav(places: Places) = viewModelScope.launch {
+        repository.updatePlaceFavImages(places)
+    }
+
     fun deleteAllCharacterFav() = viewModelScope.launch {
         repository.deleteAllCharacterFavorites()
     }
+    fun deleteAllPlaceFav() = viewModelScope.launch {
+        repository.deleteAllPlaceFavorites()
+    }
+
+    fun showAllCharacterFav(): LiveData<List<Character>> =repository.characterFavoriteListLiveData
+
+    fun showAllPlaceFav(): LiveData<List<Places>> = repository.placeFavoriteListLiveData
+
 }

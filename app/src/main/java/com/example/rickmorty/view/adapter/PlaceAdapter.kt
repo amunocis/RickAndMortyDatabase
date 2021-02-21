@@ -1,5 +1,6 @@
 package com.example.rickmorty.view.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,13 +20,20 @@ class PlaceAdapter: RecyclerView.Adapter<PlaceAdapter.PlacesVH>() {
         notifyDataSetChanged()
     }
 
-    fun selectedPlaces(): LiveData<Character> = selectedPlaces()
+    fun selectedPlaces(): LiveData<Places> = selectedPlaces
 
     inner class PlacesVH(private val binding: PlaceItemBinding):
         RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
         fun bind(place: Places) {
-            binding.tvPlace.text = place.name
+            binding.tvPlaceName.text = place.name
+            binding.tvPlaceType.text = place.type
+            binding.tvPlaceDimension.text = place.dimension
+            if (place.fav) {
+                binding.ivFav.setColorFilter(Color.RED)
+            } else {
+                binding.ivFav.setColorFilter(Color.LTGRAY)
+            }
             itemView.setOnClickListener(this)
         }
         override fun onClick(v: View?) {

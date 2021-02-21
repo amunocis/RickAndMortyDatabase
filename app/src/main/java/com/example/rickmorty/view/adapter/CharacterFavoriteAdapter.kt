@@ -4,14 +4,13 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.rickmorty.databinding.CharacterItemBinding
+import com.example.rickmorty.databinding.CharacterFavItemBinding
 import com.example.rickmorty.model.local.entities.Character
 
-class CharacterAdapter: RecyclerView.Adapter<CharacterAdapter.CharacterVH>() {
+class CharacterFavoriteAdapter: RecyclerView.Adapter<CharacterFavoriteAdapter.CharacterFavoriteVH>() {
 
     private var listCharacter = listOf<Character>()
     private val selectedCharacter = MutableLiveData<Character>()
@@ -21,9 +20,7 @@ class CharacterAdapter: RecyclerView.Adapter<CharacterAdapter.CharacterVH>() {
         notifyDataSetChanged()
     }
 
-    fun selectedCharacter(): LiveData<Character> = selectedCharacter
-
-    inner class CharacterVH(private val binding: CharacterItemBinding):
+    inner class CharacterFavoriteVH(private val binding: CharacterFavItemBinding) :
         RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
         fun bind(character: Character) {
@@ -42,13 +39,14 @@ class CharacterAdapter: RecyclerView.Adapter<CharacterAdapter.CharacterVH>() {
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterVH {
-        return CharacterVH(CharacterItemBinding.inflate(LayoutInflater.from(parent.context)))
-    }
-
-    override fun onBindViewHolder(holder: CharacterVH, position: Int) {
-        holder.bind(listCharacter[position])
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterFavoriteVH {
+        return CharacterFavoriteVH(CharacterFavItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun getItemCount() = listCharacter.size
+
+    override fun onBindViewHolder(holder: CharacterFavoriteVH, position: Int) {
+        holder.bind(listCharacter[position])
+    }
 }
+

@@ -16,6 +16,9 @@ fun fromInternetToCharacterEntity(wrapper: CharacterWrapper): List<Character> {
 
 fun fromInternetToPlacesEntity(wrapper: PlacesWrapper): List<Places> {
     return wrapper.results.map {
-        Places(it.name)
+        Places(
+            name = it.name,
+            type = it.type,
+            dimension = it.dimension)
     }
 }

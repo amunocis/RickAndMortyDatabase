@@ -55,11 +55,11 @@
             android:layout_marginRight="12dp"/>
 
         <com.nambimobile.widgets.efab.FabOption
+            android:id="@+id/btShowFavorites"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fab_icon="@drawable/ic_preview_24px"
-            app:label_text="Show Favorites"
-            android:onClick="showFavorites"/>
+            app:label_text="Show Favorites"/>
 
         <com.nambimobile.widgets.efab.FabOption
             android:id="@+id/btDelete"

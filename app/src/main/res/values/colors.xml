@@ -7,4 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!-- Paleta de colores para la app -->
+    <color name="green_dark">#5a9216</color>
+    <color name="green_mid">#8bc34a</color>
+    <color name="green_light">#ffffce</color>
+    <color name="green_white">#f9fbe7</color>
 </resources>

@@ -10,13 +10,13 @@ import androidx.navigation.fragment.findNavController
 import com.example.rickmorty.R
 import com.example.rickmorty.databinding.SelectFragmentBinding
 import com.example.rickmorty.viewModel.RMViewModel
+import com.google.android.material.snackbar.Snackbar
 
 
 class SelectFragment : Fragment() {
 
     private lateinit var binding: SelectFragmentBinding
     private val viewModel: RMViewModel by activityViewModels()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +29,7 @@ class SelectFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         binding.btCharacter.setOnClickListener {
             viewModel.selCat = 1
             findNavController().navigate(R.id.action_selectFragment_to_FirstFragment)
@@ -37,6 +38,10 @@ class SelectFragment : Fragment() {
         binding.btLocation.setOnClickListener {
             viewModel.selCat = 2
             findNavController().navigate(R.id.action_selectFragment_to_FirstFragment)
+        }
+
+        binding.btEpisodes.setOnClickListener {
+            Snackbar.make(view, "Not ready yet. Try on another universe!!", Snackbar.LENGTH_LONG).show()
         }
 
     }

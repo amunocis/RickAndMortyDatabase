@@ -22,18 +22,29 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="6dp">
+            <ImageView
+                android:id="@+id/ivCharImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_alignParentLeft="true"/>
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
+                android:layout_alignParentTop="true"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="2dp"
+                android:layout_toEndOf="@+id/ivCharImage"
                 android:orientation="vertical"
-                android:layout_marginLeft="4dp">
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@+id/ivCharImage">
                 <TextView
-                    android:id="@+id/tvPlaceName"
+                    android:id="@+id/tvCharacter"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
@@ -41,12 +52,7 @@
                     android:textSize="20sp"
                     android:textStyle="bold"/>
                 <TextView
-                    android:id="@+id/tvPlaceType"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"/>
-                <TextView
-                    android:id="@+id/tvPlaceDimension"
+                    android:id="@+id/tvSpecies"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"/>
@@ -60,6 +66,8 @@
                 android:src="@drawable/ic_favorite_24px"
                 android:layout_marginTop="70dp"
                 android:layout_marginEnd="10dp"/>
+
+
         </RelativeLayout>
     </LinearLayout>
 
